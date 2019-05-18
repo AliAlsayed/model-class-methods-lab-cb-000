@@ -7,7 +7,7 @@ class Classification < ActiveRecord::Base
   end
 
   def self.longest
-    longest = Boat.order(length: :desc).limit(1)
+    longest = Boat.select('name').order(length: :desc).limit(1)
     joins(classifications: :boats).where('boats.name IN (?)', longest)
   end
 end
